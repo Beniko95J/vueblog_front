@@ -1,4 +1,4 @@
-# vueblog-vue
+# vueblog-front
 
 ## Project setup
 ```
