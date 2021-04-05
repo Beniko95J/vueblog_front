@@ -5,15 +5,17 @@
     
     <div class="mblog">
       <h2> {{ blog.title}} </h2>
-      <el-link icon="el-icon-edit" v-if="ownBlog">
-        <router-link :to="{name: 'BlogEdit', params: {blogId: blog.id}}">
-          编辑
-        </router-link>
-      </el-link>
-      <el-divider direction="vertical"></el-divider>
-      <el-link icon="el-icon-delete" type="danger" @click="deleteBlog">
-        删除
-      </el-link>
+      <div v-if="ownBlog">
+        <el-link icon="el-icon-edit">
+          <router-link :to="{name: 'BlogEdit', params: {blogId: blog.id}}">
+            编辑
+          </router-link>
+        </el-link>
+        <el-divider direction="vertical"></el-divider>
+        <el-link icon="el-icon-delete" type="danger" @click="deleteBlog">
+          删除
+        </el-link>
+      </div>
       <el-divider></el-divider>
       <div class="markdown-body" v-html="blog.content"></div>
     </div>
@@ -81,8 +83,10 @@ export default {
         var result = md.render(blog.content);
 
         _this.blog.content = result;
-      
-        _this.ownBlog = (blog.userId === _this.$store.getters.getUser.id);
+
+        if (_this.$store.getters.getUser) {
+          _this.ownBlog = (blog.userId === _this.$store.getters.getUser.id);
+        }
       });
     }
 }
