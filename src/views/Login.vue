@@ -3,7 +3,7 @@
 
     <el-container>
       <el-header>
-        <!-- <img class="mlogo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt=""> -->
+        <img class="mlogo" src="https://www.markerhub.com/dist/images/logo/markerhub-logo.png" alt="">
       </el-header>
       <el-main>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -11,7 +11,7 @@
             <el-input v-model="ruleForm.username"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
-            <el-input type="password" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')"></el-input>
+            <el-input type="password" v-model="ruleForm.password" @keyup.enter.native="submitForm(ruleForm)"></el-input>
           </el-form-item>
 
           <el-form-item>
@@ -50,6 +50,7 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            console.log(formName);
             const _this = this
             this.$axios.post('/login', this.ruleForm).then(res => {
               console.log(res.data)
