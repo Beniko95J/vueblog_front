@@ -14,11 +14,17 @@ import "./axios"
 
 import './permission.js'
 
+import './miscs/common.css'
+
+import Aplayer from 'vue-aplayer'
+
 Vue.use(Element)
 Vue.use(mavonEditor)
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
+
+Vue.component('aplayer', Aplayer);
 
 new Vue({
   router,

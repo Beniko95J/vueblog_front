@@ -5,6 +5,8 @@ import Blogs from '../views/Blogs.vue'
 import BlogEdit from '../views/BlogEdit.vue'
 import BlogDetail from '../views/BlogDetail.vue'
 
+import NewBlogs from '../new_views/NewBlogs'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -43,7 +45,12 @@ const routes = [
     meta: {
       requireAuth: true
     }
-  }
+  },
+  {
+    path: '/test/blogs',
+    name: 'NewBlogs',
+    component: NewBlogs
+  },
 ]
 
 const router = new VueRouter({

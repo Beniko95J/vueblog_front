@@ -3,7 +3,7 @@
 
     <Header></Header>
     
-    <div class="mblog">
+    <div class="m-blog">
       <h2> {{ blog.title}} </h2>
       <div v-if="ownBlog">
         <el-link icon="el-icon-edit">
@@ -52,7 +52,6 @@ export default {
                 "Authorization": localStorage.getItem("token")
               }
             }).then(res => {
-            console.log(res);
             _this.$alert('操作成功', '提示', {
               confirmButtonText: '确定',
               callback: action => {
@@ -70,7 +69,6 @@ export default {
     },
     created() {
       const blogId = this.$route.params.blogId;
-      console.log(blogId);
       const _this = this;
       this.$axios.get('/blog/' + blogId).then(res => {
         const blog = res.data.data;
@@ -94,11 +92,12 @@ export default {
 
 <style>
 
-.mblog {
+.m-blog {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  width: 100%;
+  max-width: 1200px;
   min-height: 700px;
-  padding: 20px 15px;
+  padding: 16px 16px;
+  margin: 0 auto;
 }
 
 </style>
