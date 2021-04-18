@@ -1,13 +1,11 @@
 <template>
   <div>
-    <div class="bg">
-      <!-- <img src="../assets/banner/sekiro.jpg" alt=""> -->
-    </div>
+    <div class="bg"></div>
     <Header></Header>
     <div class="block">
       <el-timeline class="m-timeline">
         <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogs" :key="blog.id">
-          <el-card>
+          <el-card class="m-card">
             <h4>
               <router-link :to="{name: 'BlogDetail', params: {blogId: blog.id}}">
                 {{ blog.title }}
@@ -17,7 +15,6 @@
           </el-card>
         </el-timeline-item>
       </el-timeline>
-
       <div class="m-page">
         <el-pagination
           background
@@ -35,35 +32,34 @@
 <script>
 import Header from "../components/Header";
 export default {
-    name: "Blogs.vue",
-    components: {Header},
-    data() {
-      return {
-        blogs: {},
-        currentPage: 1,
-        total: 0,
-        pageSize: 5
-      }
-    },
-    methods: {
-      page (currentPage) {
-        const _this = this;
-        _this.$axios.get("/blogs?currentPage=" + currentPage).then(res => {
-          _this.blogs = res.data.data.records;
-          _this.currentPage = res.data.data.current;
-          _this.total = res.data.data.total;
-          _this.pageSize = res.data.data.size;
-        })
-      }
-    },
-    created() {
-      this.page(1);
+  name: "Blogs.vue",
+  components: {Header},
+  data() {
+    return {
+      blogs: {},
+      currentPage: 1,
+      total: 0,
+      pageSize: 5
     }
+  },
+  methods: {
+    page (currentPage) {
+      const _this = this;
+      _this.$axios.get("/blogs?currentPage=" + currentPage).then(res => {
+        _this.blogs = res.data.data.records;
+        _this.currentPage = res.data.data.current;
+        _this.total = res.data.data.total;
+        _this.pageSize = res.data.data.size;
+      })
+    }
+  },
+  created() {
+    this.page(1);
+  }
 }
 </script>
 
 <style>
-
 .m-page {
   margin: 0 auto;
   padding-bottom: 16px;
@@ -89,4 +85,7 @@ export default {
   z-index: -1;
 }
 
+.m-card {
+  height: 96px;
+}
 </style>
