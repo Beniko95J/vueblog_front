@@ -1,6 +1,6 @@
 <template>
   <div class="m-content">
-    <h3>欢迎来到beniko的博客</h3>
+    <h3 class="m-h">欢迎来到beniko的博客</h3>
     <div class="block">
     <el-avatar :size="50" :src="user.avatar"></el-avatar>
     <div>{{user.username}}</div>
@@ -44,8 +44,8 @@ export default {
     },
     created() {
         if (this.$store.getters.getUser) {
-            this.user.username = this.$store.getters.getUser.username
-            this.user.avatar = this.$store.getters.getUser.avatar
+            this.user.username = this.$store.getters.getUser.username;
+            this.user.avatar = this.$store.getters.getUser.avatar;
 
             this.hasLogin = true;
         }
@@ -56,7 +56,8 @@ export default {
 <style>
 .m-content {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0px auto;
+    padding-top: 16px;
     text-align: center;
 }
 

@@ -64,7 +64,6 @@ export default {
                 "Authorization": localStorage.getItem("token")
               }
             }).then(res => {
-              console.log(res);
               _this.$alert('操作成功', '提示', {
                 confirmButtonText: '确定',
                 callback: action => {
@@ -74,7 +73,6 @@ export default {
             });
 
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
@@ -85,7 +83,6 @@ export default {
     },
     created() {
       const blogId = this.$route.params.blogId;
-      console.log(blogId);
       const _this = this;
       if (blogId) {
         this.$axios.get('/blog/' + blogId).then(res => {
