@@ -12,7 +12,11 @@
         </el-form-item>
 
         <el-form-item label="内容" prop="content">
-          <mavon-editor v-model="ruleForm.content"></mavon-editor>
+          <mavon-editor v-model="ruleForm.content"
+                        ref="md"
+                        @imgAdd="handleImgAdd"
+                        @imgDel="handleImgDel">
+          </mavon-editor>
         </el-form-item>
 
         <el-form-item>
@@ -75,6 +79,26 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    handleImgAdd(pos, file) {
+      console.log(pos);
+      console.log(file);
+      console.log(file.size);
+
+      const formData = new FormData();
+      formData.append('file', file);
+      this.$axios.post('/upload', formData, {
+        headers: {
+          "Authorization": localStorage.getItem("token")
+        }
+      }).then(res => {
+        console.log(res);
+        const url = res.data.data;
+        this.$refs.md.$img2Url(pos, url);
+      })
+    },
+    handleImgDel(pos) {
+      console.log(pos[0]);
     }
   },
   created() {
